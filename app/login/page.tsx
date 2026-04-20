@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-// This path goes up two levels to find your lib folder
-import { supabase } from "../../lib/supabase"; 
+import { supabase } from "../lib/supabase"; 
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -24,12 +23,12 @@ export default function LoginPage() {
       if (error) {
         alert(error.message);
       } else {
-        // Forces navigation to the dashboard
+        // This takes you to the dashboard
         router.push("/dashboard");
         router.refresh();
       }
     } catch (err) {
-      alert("Check your internet connection and try again.");
+      alert("Connection error. Try again.");
     } finally {
       setLoading(false);
     }
@@ -38,10 +37,10 @@ export default function LoginPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#001f3f] text-white p-4">
       <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-lg text-gray-900">
-        <h1 className="text-2xl font-bold text-center mb-6">WELCOME BACK</h1>
+        <h1 className="text-2xl font-bold text-center mb-6 text-[#001f3f]">WELCOME BACK</h1>
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-gray-400 mb-1">UNIVERSITY EMAIL</label>
+            <label className="block text-[10px] font-bold text-gray-400 mb-1">EMAIL</label>
             <input
               type="email"
               className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
@@ -51,7 +50,7 @@ export default function LoginPage() {
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-gray-400 mb-1">PASSWORD</label>
+            <label className="block text-[10px] font-bold text-gray-400 mb-1">PASSWORD</label>
             <input
               type="password"
               className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
@@ -63,7 +62,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-[#001f3f] text-white font-bold rounded-lg"
+            className="w-full py-3 bg-[#001f3f] text-white font-bold rounded-lg hover:opacity-90 transition-opacity"
           >
             {loading ? "LOGGING IN..." : "LOG INTO CAMPUS"}
           </button>
