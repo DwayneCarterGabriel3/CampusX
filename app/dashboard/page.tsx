@@ -2,142 +2,165 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Heart, MessageCircle, Share2, MoreHorizontal, ShoppingCart, Search, PlusCircle } from "lucide-react";
+import { 
+  Heart, MessageCircle, Share2, MoreHorizontal, 
+  Search, ShoppingBag, Plus, Home, Users, Store, Bell, Menu
+} from "lucide-react";
 
-// Professional Sample Data
-const FEED_POSTS = [
+const CAMPUS_POSTS = [
   { 
     id: 1, 
     user: "John Gabriel Ikechukwu", 
+    verified: true,
     university: "Lagos State University",
-    time: "Just now",
-    title: "iPhone 13 Pro - Clean, 128GB, Midnight Blue", 
+    time: "2h",
+    content: "Upgraded my setup, selling my iPhone 13 Pro. Very neat, factory unlocked. DM for a quick deal!",
     price: "₦450,000", 
     image: "https://images.unsplash.com/photo-1632661674596-df8be070a5c5?q=80&w=1000",
-    likes: 42,
-    comments: 8
+    likes: "1.2k",
+    comments: 45
   },
   { 
     id: 2, 
     user: "Sarah Aminu", 
+    verified: false,
     university: "University of Benin",
-    time: "3h ago",
-    title: "Brand New Engineering Lab Coat & Goggles", 
+    time: "5h",
+    content: "Final year clearing! Engineering lab coat and safety goggles available for next 100L students.",
     price: "₦15,000", 
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000",
-    likes: 15,
-    comments: 3
+    likes: 342,
+    comments: 12
   }
 ];
 
-export default function SocialDashboard() {
+export default function FacebookStyleMarketplace() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-[#020617] text-white font-sans pb-24">
-      {/* --- PREMIUM HEADER --- */}
-      <nav className="sticky top-0 z-50 bg-[#020617]/90 backdrop-blur-xl border-b border-white/10 px-6 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-black italic tracking-tighter">
-          CAMPUS<span className="text-orange-500 underline decoration-2 underline-offset-4">X</span>
-        </h1>
-        <div className="flex gap-5 items-center">
-          <Search className="w-6 h-6 text-gray-400 hover:text-white cursor-pointer" />
-          <div className="relative">
-             <ShoppingCart className="w-6 h-6 text-gray-400" />
-             <span className="absolute -top-1 -right-1 bg-orange-500 text-[8px] px-1 rounded-full font-bold">2</span>
+    <div className="min-h-screen bg-[#f0f2f5] text-[#1c1e21] font-sans pb-10">
+      
+      {/* --- ELITE TOP NAV (FACEBOOK STYLE) --- */}
+      <nav className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-200 px-4 flex justify-between items-center h-[56px]">
+        <div className="flex items-center gap-2">
+          <div className="bg-[#001f3f] text-white w-10 h-10 rounded-full flex items-center justify-center font-black italic">X</div>
+          <div className="hidden md:flex items-center bg-[#f0f2f5] px-3 py-2 rounded-full gap-2">
+            <Search className="w-4 h-4 text-gray-500" />
+            <input type="text" placeholder="Search CampusX" className="bg-transparent outline-none text-sm w-40" />
           </div>
+        </div>
+
+        <div className="flex gap-8 items-center h-full">
+          <Home className="w-7 h-7 text-[#1877f2] border-b-4 border-[#1877f2] py-1 cursor-pointer" />
+          <Store className="w-7 h-7 text-gray-500 hover:text-[#1877f2] cursor-pointer" />
+          <Users className="w-7 h-7 text-gray-500 hover:text-[#1877f2] cursor-pointer" />
+        </div>
+
+        <div className="flex gap-2 items-center">
+          <div className="bg-gray-200 p-2 rounded-full"><Bell className="w-5 h-5" /></div>
+          <div className="bg-gray-200 p-2 rounded-full"><Menu className="w-5 h-5" /></div>
+          <div className="w-10 h-10 rounded-full bg-orange-500 border border-gray-200" />
         </div>
       </nav>
 
-      <main className="max-w-xl mx-auto py-6">
-        {/* --- CAMPUS SELECTOR (STORY BAR) --- */}
-        <div className="flex gap-4 overflow-x-auto px-4 pb-6 no-scrollbar">
-          {["All Schools", "UNILAG", "LASU", "UNIBEN", "ABU", "OAU"].map((school, i) => (
-            <div key={i} className="flex flex-col items-center gap-2 min-w-[75px]">
-              <div className={`w-16 h-16 rounded-full p-[2px] ${i === 0 ? 'bg-orange-500' : 'bg-gradient-to-tr from-gray-700 to-gray-500'}`}>
-                <div className="w-full h-full rounded-full bg-black border-2 border-[#020617]" />
-              </div>
-              <span className="text-[10px] text-gray-400 font-bold uppercase tracking-tight">{school}</span>
+      <main className="max-w-[700px] mx-auto pt-5">
+        
+        {/* --- STORIES BAR --- */}
+        <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
+          <div className="min-w-[112px] h-[200px] bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden relative cursor-pointer group">
+            <div className="h-[140px] bg-gray-300 overflow-hidden">
+               <div className="w-full h-full bg-orange-500" />
+            </div>
+            <div className="absolute top-[125px] left-1/2 -translate-x-1/2 bg-[#1877f2] p-1 rounded-full border-4 border-white">
+              <Plus className="w-5 h-5 text-white" />
+            </div>
+            <div className="mt-5 text-center text-[12px] font-bold">Create Story</div>
+          </div>
+          {["UNILAG", "LASU", "UNIBEN", "ABU"].map((campus, i) => (
+            <div key={i} className="min-w-[112px] h-[200px] bg-gray-400 rounded-xl overflow-hidden relative cursor-pointer shadow-sm">
+               <div className="absolute top-3 left-3 w-9 h-9 rounded-full border-4 border-[#1877f2] bg-gray-800" />
+               <span className="absolute bottom-3 left-3 text-white text-[12px] font-bold shadow-black drop-shadow-md">{campus}</span>
             </div>
           ))}
         </div>
 
-        {/* --- THE FEED --- */}
-        <div className="space-y-8 px-2 md:px-0">
-          {FEED_POSTS.map((post) => (
-            <div key={post.id} className="bg-white/5 rounded-[40px] border border-white/10 overflow-hidden shadow-2xl">
-              {/* Profile Header */}
-              <div className="p-5 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-full bg-gradient-to-br from-orange-500 to-red-500 shadow-lg shadow-orange-500/20" />
+        {/* --- POST SOMETHING (WHAT'S ON YOUR MIND) --- */}
+        <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-gray-200">
+           <div className="flex gap-3 items-center border-b border-gray-100 pb-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-orange-500" />
+              <div 
+                onClick={() => router.push('/post-item')}
+                className="bg-[#f0f2f5] hover:bg-gray-200 flex-grow py-2 px-4 rounded-full text-gray-500 cursor-pointer text-[15px]"
+              >
+                What are you selling today, John Gabriel?
+              </div>
+           </div>
+           <div className="flex justify-around text-gray-500 font-bold text-[13px]">
+              <div className="hover:bg-gray-100 p-2 rounded-lg flex items-center gap-2 cursor-pointer">
+                <Plus className="text-red-500" /> List Item
+              </div>
+              <div className="hover:bg-gray-100 p-2 rounded-lg flex items-center gap-2 cursor-pointer">
+                <ShoppingCart className="text-green-500" /> Marketplace
+              </div>
+           </div>
+        </div>
+
+        {/* --- NEWS FEED --- */}
+        <div className="space-y-4">
+          {CAMPUS_POSTS.map((post) => (
+            <div key={post.id} className="bg-white rounded-xl shadow-sm border border-gray-200">
+              {/* Post Header */}
+              <div className="p-3 flex items-center justify-between">
+                <div className="flex gap-3 items-center">
+                  <div className="w-10 h-10 rounded-full bg-gray-300" />
                   <div>
-                    <h4 className="text-sm font-bold tracking-wide">{post.user}</h4>
-                    <p className="text-[10px] text-gray-500 font-medium uppercase">{post.university} • {post.time}</p>
+                    <div className="flex items-center gap-1 font-bold text-[15px] hover:underline cursor-pointer">
+                      {post.user} {post.verified && <span className="text-[#1877f2] text-xs">✔</span>}
+                    </div>
+                    <p className="text-[12px] text-gray-500 leading-none mt-0.5">{post.time} • {post.university}</p>
                   </div>
                 </div>
-                <MoreHorizontal className="w-5 h-5 text-gray-600" />
+                <MoreHorizontal className="text-gray-500 cursor-pointer" />
               </div>
 
-              {/* High-Resolution Media Section */}
-              <div className="relative w-full aspect-[4/5] bg-neutral-900 group">
-                <img src={post.image} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute bottom-6 left-6 flex flex-col gap-1">
-                   <span className="bg-orange-500 text-white text-lg font-black px-4 py-1.5 rounded-2xl shadow-xl w-fit">
-                    {post.price}
-                  </span>
-                  <span className="bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full w-fit border border-white/20 uppercase tracking-widest">
-                    Available Now
-                  </span>
+              {/* Caption */}
+              <div className="px-3 pb-3 text-[15px] leading-tight">
+                {post.content}
+              </div>
+
+              {/* Product Image */}
+              <div className="relative bg-black w-full border-y border-gray-100">
+                <img src={post.image} className="w-full h-auto max-h-[600px] object-contain" />
+                <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow-xl border border-gray-200">
+                  <span className="text-[#1877f2] font-black text-lg">{post.price}</span>
                 </div>
               </div>
 
-              {/* Engagement Bar */}
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-5">
-                  <div className="flex gap-6">
-                    <div className="flex items-center gap-2 group cursor-pointer">
-                      <Heart className="w-7 h-7 text-gray-400 group-hover:text-red-500 transition-colors" />
-                      <span className="text-xs font-black text-gray-400">{post.likes}</span>
-                    </div>
-                    <div className="flex items-center gap-2 group cursor-pointer">
-                      <MessageCircle className="w-7 h-7 text-gray-400 group-hover:text-orange-500 transition-colors" />
-                      <span className="text-xs font-black text-gray-400">{post.comments}</span>
-                    </div>
-                    <Share2 className="w-7 h-7 text-gray-400 hover:text-blue-400 cursor-pointer transition-colors" />
-                  </div>
-                  <button className="bg-white text-black text-[11px] font-black px-6 py-2.5 rounded-full uppercase tracking-tighter hover:bg-orange-500 hover:text-white transition-all duration-300 shadow-xl">
-                    Message Seller
-                  </button>
-                </div>
-                <p className="text-sm leading-relaxed">
-                  <span className="font-black text-orange-500 mr-2">PRO LISTING</span>
-                  {post.title}
-                </p>
+              {/* Interaction Stats */}
+              <div className="p-3 flex justify-between items-center text-gray-500 text-[14px]">
+                 <div className="flex items-center gap-1">
+                   <div className="bg-[#1877f2] p-1 rounded-full"><Heart className="w-3 h-3 text-white fill-white" /></div>
+                   <span>{post.likes}</span>
+                 </div>
+                 <div className="hover:underline cursor-pointer">{post.comments} comments</div>
+              </div>
+
+              {/* Buttons */}
+              <div className="mx-3 border-t border-gray-100 py-1 flex justify-around font-bold text-gray-600 text-[14px]">
+                 <button className="flex-grow py-2 hover:bg-gray-100 rounded-lg flex items-center justify-center gap-2 transition-colors">
+                   <Heart className="w-5 h-5" /> Like
+                 </button>
+                 <button className="flex-grow py-2 hover:bg-gray-100 rounded-lg flex items-center justify-center gap-2 transition-colors">
+                   <MessageCircle className="w-5 h-5" /> Message
+                 </button>
+                 <button className="flex-grow py-2 hover:bg-gray-100 rounded-lg flex items-center justify-center gap-2 transition-colors">
+                   <Share2 className="w-5 h-5" /> Share
+                 </button>
               </div>
             </div>
           ))}
         </div>
       </main>
-
-      {/* --- PROFESSIONAL BOTTOM NAV --- */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#020617]/80 backdrop-blur-2xl border-t border-white/5 px-8 py-5 flex justify-around items-center z-50">
-        <div className="flex flex-col items-center gap-1">
-           <Heart className="w-6 h-6 text-orange-500" />
-           <div className="w-1 h-1 bg-orange-500 rounded-full" />
-        </div>
-        <ShoppingCart className="w-6 h-6 text-gray-500" />
-        
-        {/* Floating Action Button */}
-        <div 
-          onClick={() => router.push('/post-item')}
-          className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center -mt-12 border-4 border-[#020617] shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:scale-110 active:scale-95 transition-all cursor-pointer"
-        >
-          <PlusCircle className="w-8 h-8 text-white" />
-        </div>
-        
-        <MessageCircle className="w-6 h-6 text-gray-500" />
-        <div className="w-7 h-7 rounded-full bg-gray-700 border border-white/20" />
-      </div>
     </div>
   );
 }
